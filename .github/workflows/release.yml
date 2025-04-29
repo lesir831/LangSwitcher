@@ -1,0 +1,74 @@
+name: Create Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: '版本号 (例如: 1.0.0)'
+        required: true
+      prerelease:
+        description: '是否为预发布版本'
+        type: boolean
+        default: false
+      draft:
+        description: '是否为草稿版本'
+        type: boolean
+        default: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v3
+        
+      - name: 设置版本号
+        run: |
+          # 更新manifest.json中的版本号
+          sed -i 's/"version": "[0-9]\+\.[0-9]\+\(\.[0-9]\+\)*"/"version": "${{ github.event.inputs.version }}"/' src/manifest.json
+        
+      - name: 创建ZIP包
+        run: |
+          mkdir -p dist
+          cd src
+          zip -r ../dist/language-switcher-${{ github.event.inputs.version }}.zip *
+          cd ..
+        
+      - name: 创建Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ github.event.inputs.version }}
+          release_name: Version ${{ github.event.inputs.version }}
+          draft: ${{ github.event.inputs.draft }}
+          prerelease: ${{ github.event.inputs.prerelease }}
+          body: |
+            Language Switcher Chrome扩展 v${{ github.event.inputs.version }}
+            
+            ## 更新内容
+            
+            - 请在此处列出更新内容
+            
+            ## 安装方法
+            
+            1. 下载ZIP文件
+            2. 解压到本地文件夹
+            3. 在Chrome中打开 chrome://extensions/
+            4. 开启开发者模式
+            5. 点击「加载已解压的扩展程序」按钮
+            6. 选择解压后的文件夹
+
+      - name: 上传Release资产
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./dist/language-switcher-${{ github.event.inputs.version }}.zip
+          asset_name: language-switcher-${{ github.event.inputs.version }}.zip
+          asset_content_type: application/zip
