@@ -14,13 +14,18 @@
 
 ## 安装方法
 
-### 从Chrome网上应用商店安装
+### 从GitHub Release安装
 
-*即将上线*
+1. 在GitHub仓库的[Releases页面](https://github.com/您的用户名/LangSwitcher/releases)下载最新的ZIP文件
+2. 解压下载的ZIP文件到本地文件夹
+3. 打开Chrome浏览器，进入扩展管理页面：`chrome://extensions/`
+4. 开启右上角的「开发者模式」
+5. 点击「加载已解压的扩展程序」按钮
+6. 选择解压后的文件夹
 
-### 开发者模式安装
+### 从源代码安装
 
-1. 下载或克隆此仓库到本地
+1. 克隆此仓库到本地
 2. 打开Chrome浏览器，进入扩展管理页面：`chrome://extensions/`
 3. 开启右上角的「开发者模式」
 4. 点击「加载已解压的扩展程序」按钮
