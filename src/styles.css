@@ -1,0 +1,122 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+.container {
+  width: 380px;
+  padding: 15px;
+}
+
+h1 {
+  font-size: 20px;
+  margin: 0 0 5px 0;
+  color: #1a73e8;
+}
+
+h2 {
+  font-size: 16px;
+  margin: 15px 0 10px 0;
+  color: #333;
+}
+
+p {
+  margin: 5px 0 15px 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.form-section, .rules-section, .info-section {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 12px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+input[type="text"]:focus {
+  border-color: #1a73e8;
+  outline: none;
+}
+
+button {
+  background-color: #1a73e8;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #1557b0;
+}
+
+.rule-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.rule-item:last-child {
+  border-bottom: none;
+}
+
+.rule-content {
+  flex: 1;
+}
+
+.rule-domain {
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
+.rule-language {
+  color: #666;
+  font-size: 13px;
+}
+
+.rule-actions button {
+  background-color: #f44336;
+  font-size: 12px;
+  padding: 5px 10px;
+}
+
+.rule-actions button:hover {
+  background-color: #d32f2f;
+}
+
+.no-rules {
+  color: #888;
+  text-align: center;
+  padding: 15px 0;
+  font-style: italic;
+}

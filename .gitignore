@@ -1,0 +1,46 @@
+# Chrome Extension specific
+*.crx
+*.pem
+*.zip
+
+# OS specific files
+.DS_Store
+.DS_Store?
+Thumbs.db
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional dependencies directory
+node_modules/
+
+# Optional build directory
+dist/
+build/
+
+# Misc
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local

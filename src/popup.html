@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Language Switcher</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Language Switcher</h1>
+    <p>为特定域名配置 Accept-Language 请求头</p>
+    
+    <div class="form-section">
+      <h2>添加规则</h2>
+      <div class="form-group">
+        <label for="domain">域名 (支持通配符，如 *.example.com):</label>
+        <input type="text" id="domain" placeholder="例如: example.com 或 *.example.com">
+      </div>
+      <div class="form-group">
+        <label for="language">Accept-Language 值:</label>
+        <input type="text" id="language" placeholder="例如: en-US,en;q=0.9">
+      </div>
+      <button id="addRule">添加规则</button>
+    </div>
+
+    <div class="rules-section">
+      <h2>当前规则</h2>
+      <div id="rulesList">
+        <!-- 规则将在这里动态添加 -->
+        <div class="no-rules">暂无规则，请添加一条规则</div>
+      </div>
+    </div>
+    
+    <div class="info-section">
+      <p>提示: 不在规则列表中的域名将使用浏览器默认的 Accept-Language 设置</p>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
