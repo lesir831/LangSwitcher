@@ -16,7 +16,7 @@
 
 ### 从GitHub Release安装
 
-1. 在GitHub仓库的[Releases页面](https://github.com/您的用户名/LangSwitcher/releases)下载最新的ZIP文件
+1. 在GitHub仓库的[Releases页面](https://github.com/lesir831/LangSwitcher/releases/tag/v1.0)下载最新的ZIP文件
 2. 解压下载的ZIP文件到本地文件夹
 3. 打开Chrome浏览器，进入扩展管理页面：`chrome://extensions/`
 4. 开启右上角的「开发者模式」
