@@ -104,14 +104,72 @@ button:hover {
   font-size: 13px;
 }
 
+.rule-actions {
+  display: flex;
+  gap: 5px;
+}
+
 .rule-actions button {
-  background-color: #f44336;
   font-size: 12px;
   padding: 5px 10px;
 }
 
-.rule-actions button:hover {
+.edit-rule {
+  background-color: #4CAF50;
+}
+
+.edit-rule:hover {
+  background-color: #388E3C;
+}
+
+.delete-rule {
+  background-color: #f44336;
+}
+
+.delete-rule:hover {
   background-color: #d32f2f;
+}
+
+/* 编辑模式样式 */
+.rule-edit-form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rule-edit-form .form-group {
+  margin-bottom: 0;
+}
+
+.rule-edit-form input {
+  padding: 6px 8px;
+  font-size: 13px;
+}
+
+.rule-edit-actions {
+  display: flex;
+  gap: 5px;
+}
+
+.save-edit {
+  background-color: #4CAF50;
+  font-size: 12px;
+  padding: 5px 10px;
+}
+
+.save-edit:hover {
+  background-color: #388E3C;
+}
+
+.cancel-edit {
+  background-color: #9e9e9e;
+  font-size: 12px;
+  padding: 5px 10px;
+}
+
+.cancel-edit:hover {
+  background-color: #757575;
 }
 
 .no-rules {
