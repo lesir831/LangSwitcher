@@ -3,13 +3,14 @@ let ruleIdCounter = 1;
 
 // 初始化扩展
 chrome.runtime.onInstalled.addListener(() => {
-  // 初始化空规则集
+  // 初始化规则集
   initializeRules();
 });
 
 // 接收来自弹出界面的消息
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === 'updateRules') {
+    // 更新规则
     updateDynamicRules(message.rules);
   }
 });
@@ -28,17 +29,22 @@ function initializeRules() {
 async function updateDynamicRules(languageRules) {
   try {
     // 清除现有的所有规则
-    await chrome.declarativeNetRequest.updateDynamicRules({
-      removeRuleIds: await getExistingRuleIds()
-    });
+    await clearAllRules();
     
     // 如果没有规则，就提前返回
     if (!languageRules || languageRules.length === 0) {
       return;
     }
     
-    // 准备新规则
-    const newRules = languageRules.map((rule, index) => {
+    // 过滤出启用的规则
+    const enabledRules = languageRules.filter(rule => rule.enabled !== false);
+    
+    if (enabledRules.length === 0) {
+      return;
+    }
+    
+    // 准备新规则，只应用启用的规则
+    const newRules = enabledRules.map((rule, index) => {
       return createRule(rule.domain, rule.language, index + 1);
     });
     
@@ -50,6 +56,18 @@ async function updateDynamicRules(languageRules) {
     console.log('动态规则已更新:', newRules);
   } catch (error) {
     console.error('更新规则时出错:', error);
+  }
+}
+
+// 清除所有规则
+async function clearAllRules() {
+  try {
+    await chrome.declarativeNetRequest.updateDynamicRules({
+      removeRuleIds: await getExistingRuleIds()
+    });
+    console.log('所有规则已清除');
+  } catch (error) {
+    console.error('清除规则时出错:', error);
   }
 }
 

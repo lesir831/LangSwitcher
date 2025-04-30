@@ -6,6 +6,9 @@ on:
       version:
         description: '版本号 (例如: 1.0.0)'
         required: true
+      changelog:
+        description: '更新内容 (如不填写，将自动获取commit消息)'
+        required: false
       prerelease:
         description: '是否为预发布版本'
         type: boolean
@@ -36,6 +39,41 @@ jobs:
           zip -r ../dist/language-switcher-${{ github.event.inputs.version }}.zip *
           cd ..
         
+      - name: 获取更新日志
+        id: get_changelog
+        run: |
+          if [ -z "${{ github.event.inputs.changelog }}" ]; then
+            echo "未提供自定义更新内容，正在获取commit消息..."
+            # 获取最近的标签
+            latest_tag=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+            
+            if [ -z "$latest_tag" ]; then
+              # 如果没有找到标签，获取所有commit
+              echo "没有找到之前的release，获取所有commit信息"
+              changelog=$(git log --pretty=format:"- %s" | sed 's/\\n/\n/g')
+            else
+              # 获取从最近标签到现在的所有commit消息
+              echo "从标签 $latest_tag 开始获取commit信息"
+              changelog=$(git log $latest_tag..HEAD --pretty=format:"- %s" | sed 's/\\n/\n/g')
+            fi
+            
+            # 如果没有commit信息，添加默认消息
+            if [ -z "$changelog" ]; then
+              changelog="- 未找到新的commit信息"
+            fi
+          else
+            # 使用提供的自定义更新内容
+            changelog="${{ github.event.inputs.changelog }}"
+            # 确保每行前面有 '- ' 前缀
+            changelog=$(echo "$changelog" | sed 's/^\([^-]\)/- \1/g')
+          fi
+          
+          # 将更新日志保存到输出变量，确保多行内容正确保存
+          changelog="${changelog//'%'/'%25'}"
+          changelog="${changelog//$'\n'/'%0A'}"
+          changelog="${changelog//$'\r'/'%0D'}"
+          echo "::set-output name=changelog::$changelog"
+      
       - name: 创建Release
         id: create_release
         uses: actions/create-release@v1
@@ -51,7 +89,7 @@ jobs:
             
             ## 更新内容
             
-            - 请在此处列出更新内容
+            ${{ steps.get_changelog.outputs.changelog }}
             
             ## 安装方法
             

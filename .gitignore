@@ -2,6 +2,8 @@
 *.crx
 *.pem
 *.zip
+_metadata/
+
 
 # OS specific files
 .DS_Store
