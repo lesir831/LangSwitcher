@@ -118,11 +118,18 @@ button:hover {
 .rule-actions {
   display: flex;
   gap: 5px;
+  align-items: center;
 }
 
 .rule-actions button {
   font-size: 12px;
   padding: 5px 10px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  margin: 0;
 }
 
 .rule-actions .edit-rule {
@@ -165,6 +172,7 @@ button:hover {
   display: inline-block;
   width: 40px;
   height: 20px;
+  margin: 2px 0;
 }
 
 .switch input {
